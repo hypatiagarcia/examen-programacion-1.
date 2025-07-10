@@ -22,7 +22,10 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return userRepository.findAll();
+        System.out.println("DEBUG: UserService.findAll() llamado");
+        List<User> users = userRepository.findAll();
+        System.out.println("DEBUG: Usuarios encontrados en base de datos: " + users.size());
+        return users;
     }
 
     public Optional<User> findById(Long id) {
@@ -38,6 +41,14 @@ if (user.getPassword() != null) {
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public boolean existsByUsername(String username) {
+        return userRepository.findByUsername(username).isPresent();
+    }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }
 

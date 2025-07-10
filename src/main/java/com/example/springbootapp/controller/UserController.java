@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -21,8 +23,18 @@ public class UserController {
 
     @GetMapping
     public String listAll(Model model) {
-        model.addAttribute("users", userService.findAll());
-        return "user/list";
+        System.out.println("DEBUG: Entrando al método listAll de UserController");
+        try {
+            List<User> users = userService.findAll();
+            System.out.println("DEBUG: Usuarios encontrados: " + users.size());
+            model.addAttribute("users", users);
+            System.out.println("DEBUG: Retornando vista user/list");
+            return "user/list";
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     @GetMapping("/create")

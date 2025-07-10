@@ -1,300 +1,171 @@
-# Spring Boot CRUD Application
+# Aplicación CRUD con Spring Boot (Examen Programación I)
 
-A modern Spring Boot 3.2.0 application with user authentication, CRUD operations, and PostgreSQL database integration.
+Una aplicación web moderna desarrollada con Spring Boot 3.2, Spring Security, JPA y PostgreSQL. El proyecto implementa operaciones CRUD completas, autenticación de usuarios y una interfaz de usuario amigable con Thymeleaf y Bootstrap.
 
-## 🚀 Features
+## 🚀 Características Principales
 
-- **User Authentication** with Spring Security
-- **CRUD Operations** for Products, Users, and Orders
-- **PostgreSQL Database** integration with JPA/Hibernate
-- **Modern UI** with Bootstrap and Thymeleaf templates
-- **Java 21** support
-- **Default Admin User** creation on startup
-- **Responsive Design** with Font Awesome icons
+- **Autenticación de Usuarios**: Sistema de login y registro seguro con Spring Security.
+- **Operaciones CRUD**: Gestión completa (Crear, Leer, Actualizar, Eliminar) para Productos y Órdenes.
+- **Base de Datos PostgreSQL**: Integración robusta con PostgreSQL a través de Spring Data JPA.
+- **Interfaz de Usuario Moderna**: Diseño responsivo y atractivo utilizando plantillas Thymeleaf y Bootstrap 5.
+- **Java 21**: Desarrollado con la última versión LTS de Java.
+- **Usuario Administrador por Defecto**: Creación automática de un usuario `admin` al iniciar la aplicación para facilitar las pruebas.
 
-## 📋 Prerequisites
+## 📋 Prerrequisitos
 
-- **Java 21** or higher
-- **PostgreSQL** database server
-- **Maven** 3.6+ (or use the included Maven wrapper)
-- **Git** (for version control)
+- **Java 21** o superior.
+- Servidor de base de datos **PostgreSQL**.
+- **Maven** 3.6+ (o utilizar el `mvnw` wrapper incluido).
+- **Git** para el control de versiones.
 
-## 🛠️ Technology Stack
+## 🛠️ Tecnologías Utilizadas
 
-- **Spring Boot** 3.2.0
-- **Spring Security** 6.x
-- **Spring Data JPA** with Hibernate
-- **Thymeleaf** template engine
-- **PostgreSQL** database
-- **Bootstrap** 5.1.3
-- **Font Awesome** 6.0.0
-- **Maven** for dependency management
-- **Lombok** for reducing boilerplate code
+- **Backend**: Spring Boot 3.2.0, Spring Security 6.x, Spring Data JPA.
+- **Frontend**: Thymeleaf, Bootstrap 5.1.3, Font Awesome 6.0.0.
+- **Base de Datos**: PostgreSQL.
+- **Gestión de Dependencias**: Maven.
+- **Utilidades**: Lombok para reducir código repetitivo.
 
-## 🗄️ Database Setup
+## 🗄️ Configuración de la Base de Datos
 
-1. Install PostgreSQL on your system
-2. Create a database named `springboot_crud`:
-   ```sql
-   CREATE DATABASE springboot_crud;
-   ```
-3. Create a user (optional):
-   ```sql
-   CREATE USER springboot_user WITH PASSWORD 'password';
-   GRANT ALL PRIVILEGES ON DATABASE springboot_crud TO springboot_user;
-   ```
+1.  Asegúrate de tener PostgreSQL instalado y en ejecución.
+2.  Crea una nueva base de datos. Por defecto, la aplicación usa el nombre `springboot_crud`.
+    ```sql
+    CREATE DATABASE springboot_crud;
+    ```
+3.  (Opcional) Puedes crear un usuario específico para la aplicación:
+    ```sql
+    CREATE USER tu_usuario WITH PASSWORD 'tu_contraseña';
+    GRANT ALL PRIVILEGES ON DATABASE springboot_crud TO tu_usuario;
+    ```
 
-## ⚙️ Configuration
+## ⚙️ Configuración del Proyecto
 
-The application is configured through `src/main/resources/application.properties`:
+La configuración principal se encuentra en `src/main/resources/application.properties`. Asegúrate de ajustar las credenciales de la base de datos a tu entorno local.
 
 ```properties
-# Database Configuration
+# Configuración de la Base de Datos
 spring.datasource.url=jdbc:postgresql://localhost:5432/springboot_crud
 spring.datasource.username=postgres
 spring.datasource.password=password
 spring.datasource.driver-class-name=org.postgresql.Driver
 
-# JPA/Hibernate Configuration
+# Configuración de JPA/Hibernate
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
-# Server Configuration
+# Configuración del Servidor
 server.port=8080
 
-# Thymeleaf Configuration
+# Configuración de Thymeleaf (deshabilitar caché para desarrollo)
 spring.thymeleaf.cache=false
 ```
 
-**Note**: Update the database credentials according to your PostgreSQL setup.
+## 🚀 Cómo Ejecutar la Aplicación
 
-## 🚀 Running the Application
+### Usando el Maven Wrapper (Recomendado)
 
-### Using Maven Wrapper (Recommended)
+1.  **Clona el repositorio**:
+    ```bash
+    git clone https://github.com/tu_usuario/examen-programacion-1.git
+    cd examen-programacion-1
+    ```
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd springbootapp
-   ```
+2.  **Da permisos de ejecución al wrapper** (si es necesario):
+    ```bash
+    chmod +x mvnw
+    ```
 
-2. **Make the Maven wrapper executable**:
-   ```bash
-   chmod +x mvnw
-   ```
+3.  **Ejecuta la aplicación**:
+    ```bash
+    ./mvnw spring-boot:run
+    ```
 
-3. **Run the application**:
-   ```bash
-   ./mvnw spring-boot:run
-   ```
+### Usando Maven
 
-### Using Maven
+1.  **Compila el proyecto**:
+    ```bash
+    mvn clean compile
+    ```
 
-1. **Compile the project**:
-   ```bash
-   mvn clean compile
-   ```
+2.  **Ejecuta la aplicación**:
+    ```bash
+    mvn spring-boot:run
+    ```
 
-2. **Run the application**:
-   ```bash
-   mvn spring-boot:run
-   ```
+### Usando el archivo JAR
 
-### Using JAR file
+1.  **Construye el JAR**:
+    ```bash
+    ./mvnw clean package
+    ```
 
-1. **Build the JAR**:
-   ```bash
-   ./mvnw clean package
-   ```
+2.  **Ejecuta el JAR**:
+    ```bash
+    java -jar target/springbootapp-0.0.1-SNAPSHOT.jar
+    ```
 
-2. **Run the JAR**:
-   ```bash
-   java -jar target/springbootapp-0.0.1-SNAPSHOT.jar
-   ```
+## 🌐 Acceso a la Aplicación
 
-## 🌐 Accessing the Application
+Una vez que la aplicación esté en ejecución:
 
-Once the application is running:
+-   **URL Principal**: [http://localhost:8080](http://localhost:8080)
+-   **Página de Login**: [http://localhost:8080/login](http://localhost:8080/login)
+-   **Credenciales por Defecto**:
+    -   **Usuario**: `admin`
+    -   **Contraseña**: `admin123`
 
-- **Main URL**: http://localhost:8080
-- **Login Page**: http://localhost:8080/login
-- **Default Credentials**: 
-  - Username: `admin`
-  - Password: `admin123`
-
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
 ```
 src/
-├── main/
-│   ├── java/com/example/springbootapp/
-│   │   ├── config/
-│   │   │   └── SecurityConfig.java          # Security configuration
-│   │   ├── controller/
-│   │   │   ├── MainController.java          # Home and login routes
-│   │   │   ├── ProductController.java       # Product CRUD operations
-│   │   │   ├── UserController.java          # User management
-│   │   │   └── OrderController.java         # Order management
-│   │   ├── model/
-│   │   │   ├── User.java                    # User entity
-│   │   │   ├── Product.java                 # Product entity
-│   │   │   └── Order.java                   # Order entity
-│   │   ├── repository/
-│   │   │   ├── UserRepository.java          # User data access
-│   │   │   ├── ProductRepository.java       # Product data access
-│   │   │   └── OrderRepository.java         # Order data access
-│   │   ├── service/
-│   │   │   ├── UserService.java             # User business logic
-│   │   │   ├── ProductService.java          # Product business logic
-│   │   │   ├── OrderService.java            # Order business logic
-│   │   │   └── UserDetailsServiceImpl.java  # Security user details
-│   │   └── SpringBootAppApplication.java    # Main application class
-│   └── resources/
-│       ├── templates/
-│       │   ├── login.html                   # Login page
-│       │   ├── product/                     # Product templates
-│       │   │   ├── list.html
-│       │   │   └── form.html
-│       │   ├── user/                        # User templates
-│       │   │   ├── list.html
-│       │   │   └── form.html
-│       │   └── order/                       # Order templates
-│       │       ├── list.html
-│       │       └── form.html
-│       └── application.properties           # Application configuration
-└── pom.xml                                  # Maven dependencies
+└── main/
+    ├── java/com/example/springbootapp/
+    │   ├── config/
+    │   │   ├── DataLoader.java          # Carga datos iniciales (ej. admin)
+    │   │   └── SecurityConfig.java      # Configuración de Spring Security
+    │   ├── controller/
+    │   │   ├── MainController.java      # Rutas principales (home, login)
+    │   │   ├── ProductController.java   # CRUD de Productos
+    │   │   ├── OrderController.java     # CRUD de Órdenes
+    │   │   └── RegistrationController.java # Registro de usuarios
+    │   ├── model/
+    │   │   ├── User.java                # Entidad Usuario
+    │   │   ├── Product.java             # Entidad Producto
+    │   │   └── Order.java               # Entidad Orden
+    │   ├── repository/
+    │   │   ├── UserRepository.java      # Repositorio para Usuarios
+    │   │   ├── ProductRepository.java   # Repositorio para Productos
+    │   │   └── OrderRepository.java     # Repositorio para Órdenes
+    │   ├── service/
+    │   │   ├── UserService.java         # Lógica de negocio para Usuarios
+    │   │   ├── ProductService.java      # Lógica de negocio para Productos
+    │   │   └── UserDetailsServiceImpl.java # Servicio para la autenticación
+    │   └── SpringBootAppApplication.java # Clase principal de la aplicación
+    └── resources/
+        ├── static/                      # Archivos estáticos (CSS, JS)
+        ├── templates/                   # Plantillas Thymeleaf
+        │   ├── login.html
+        │   ├── register.html
+        │   ├── dashboard.html
+        │   ├── product/
+        │   │   ├── list.html
+        │   │   └── form.html
+        │   └── order/
+        │       ├── list.html
+        │       └── form.html
+        └── application.properties       # Configuración de la aplicación
+pom.xml                                  # Dependencias de Maven
 ```
 
-## 🔐 Security Features
+## 🔐 Características de Seguridad
 
-- **Authentication**: Form-based login with Spring Security
-- **Password Encryption**: BCrypt password encoding
-- **Session Management**: Secure session handling
-- **CSRF Protection**: Enabled by default
-- **Role-based Access**: Basic ROLE_USER implementation
-
-## 🗃️ Database Schema
-
-The application automatically creates the following tables:
-
-### Users Table
-- `id` (BIGSERIAL, Primary Key)
-- `username` (VARCHAR, Unique)
-- `password` (VARCHAR, Encrypted)
-- `email` (VARCHAR)
-
-### Products Table
-- `id` (BIGSERIAL, Primary Key)
-- `name` (VARCHAR)
-- `price` (DECIMAL)
-- `description` (TEXT)
-
-### Orders Table
-- `id` (BIGSERIAL, Primary Key)
-- `user_id` (BIGINT, Foreign Key → users.id)
-- `product_id` (BIGINT, Foreign Key → products.id)
-- `quantity` (INTEGER)
-
-## 🔧 Development
-
-### Adding New Features
-
-1. **Models**: Create new entities in `src/main/java/com/example/springbootapp/model/`
-2. **Repositories**: Add data access interfaces in `src/main/java/com/example/springbootapp/repository/`
-3. **Services**: Implement business logic in `src/main/java/com/example/springbootapp/service/`
-4. **Controllers**: Create web controllers in `src/main/java/com/example/springbootapp/controller/`
-5. **Templates**: Add Thymeleaf templates in `src/main/resources/templates/`
-
-### Hot Reload
-
-The application includes Spring Boot DevTools for hot reload during development. Changes to:
-- Java classes (with IDE recompilation)
-- Templates and static resources
-- Configuration files
-
-Will be automatically reloaded without restarting the application.
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **Database Connection Error**:
-   - Verify PostgreSQL is running
-   - Check database credentials in `application.properties`
-   - Ensure the database exists
-
-2. **Port Already in Use**:
-   - Change the port in `application.properties`: `server.port=8081`
-   - Or kill the process using port 8080: `lsof -ti:8080 | xargs kill -9`
-
-3. **Java Version Issues**:
-   - Ensure Java 21 is installed: `java -version`
-   - Set JAVA_HOME environment variable
-
-4. **Maven Issues**:
-   - Clear Maven cache: `./mvnw clean`
-   - Verify Maven wrapper permissions: `chmod +x mvnw`
-
-## 📝 API Endpoints
-
-### Authentication
-- `GET /login` - Login page
-- `POST /login` - Process login
-- `POST /logout` - Logout
-
-### Products
-- `GET /products` - List all products
-- `GET /products/new` - New product form
-- `POST /products` - Create product
-- `GET /products/{id}/edit` - Edit product form
-- `PUT /products/{id}` - Update product
-- `DELETE /products/{id}` - Delete product
-
-### Users
-- `GET /users` - List all users
-- `GET /users/new` - New user form
-- `POST /users` - Create user
-- `GET /users/{id}/edit` - Edit user form
-- `PUT /users/{id}` - Update user
-- `DELETE /users/{id}` - Delete user
-
-### Orders
-- `GET /orders` - List all orders
-- `GET /orders/new` - New order form
-- `POST /orders` - Create order
-- `GET /orders/{id}/edit` - Edit order form
-- `PUT /orders/{id}` - Update order
-- `DELETE /orders/{id}` - Delete order
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Create a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-For support and questions:
-- Create an issue in the repository
-- Check the troubleshooting section
-- Review Spring Boot documentation
-
-## 🔄 Version History
-
-- **v1.0.0** - Initial release with basic CRUD operations
-  - Spring Boot 3.2.0
-  - Java 21 support
-  - PostgreSQL integration
-  - User authentication
-  - Modern Bootstrap UI
+-   **Autenticación**: Login basado en formularios con Spring Security.
+-   **Autorización**: Rutas protegidas que requieren autenticación.
+-   **Cifrado de Contraseñas**: Uso de `BCryptPasswordEncoder` para almacenar las contraseñas de forma segura.
+-   **Protección CSRF**: Habilitada por defecto para proteger contra ataques de falsificación de solicitudes.
 
 ---
 
-**Built with ❤️ using Spring Boot and Java 21**
+**Desarrollado con ❤️ para el examen final de Programación I.**
